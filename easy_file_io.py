@@ -32,7 +32,21 @@ class EasyFileIO():
         Given a file in the path and a list(str), writes the lines to the
         provided file.
         """
-        return FileWriter.LinesToFile(filename, lines)
+        FileWriter.LinesToFile(filename, lines)
+
+    @staticmethod
+    def AppendToFile(filename: str, lines: list()) -> None:
+        """
+        Static Method to append a list of lines of text to a specified file
+        """
+        FileWriter.AppendToFile(filename, lines)
+
+    @staticmethod
+    def CreateEmptyFile(filename: str) -> None:
+        """
+        Simple method to create an empty file
+        """
+        FileWriter.LinesToFile(filename=filename, lines=[])
 
 
 ###############################################################################
@@ -69,6 +83,14 @@ class FileWriter():
         Simple function but is used to prevent duplication.
         """
         with open(filename, 'w') as f:
+            f.writelines(lines)
+
+    @staticmethod
+    def AppendToFile(filename: str, lines: list()) -> None:
+        """
+        Function to append lines to file
+        """
+        with open(filename, 'a+') as f:
             f.writelines(lines)
 
 # class FileWriter():

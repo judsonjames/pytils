@@ -35,11 +35,11 @@ class EasyFileIO():
         FileWriter.LinesToFile(filename, lines)
 
     @staticmethod
-    def AppendToFile(filename: str, lines: list()) -> None:
+    def AppendToFile(filename: str, lines: list(), new_line=True) -> None:
         """
         Static Method to append a list of lines of text to a specified file
         """
-        FileWriter.AppendToFile(filename, lines)
+        FileWriter.AppendToFile(filename, lines, new_line)
 
     @staticmethod
     def CreateEmptyFile(filename: str) -> None:
@@ -86,12 +86,17 @@ class FileWriter():
             f.writelines(lines)
 
     @staticmethod
-    def AppendToFile(filename: str, lines: list()) -> None:
+    def AppendToFile(filename: str, lines: list(), new_line=False) -> None:
         """
         Function to append lines to file
         """
         with open(filename, 'a+') as f:
-            f.writelines(lines)
+            if new_line is True:
+                for l in lines:
+                    f.write(l)
+                    f.write('\n')
+            else:
+                f.writelines(lines)
 
 # class FileWriter():
 #     """ File Writer
